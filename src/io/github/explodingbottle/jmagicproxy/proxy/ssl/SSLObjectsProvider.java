@@ -79,16 +79,14 @@ public class SSLObjectsProvider {
 		} catch (GeneralSecurityException e) {
 			providerLogger.log(LoggingLevel.WARN, "Failed to instantiate the outgoing factory.", e);
 		}
-		try {
+		try (FileInputStream keyStorePath = new FileInputStream(keyStoreFile);
+		     FileInputStream trustStorePath = new FileInputStream(keyStoreFile)) 
+		    {
 			KeyStore trustStore = KeyStore.getInstance(keystoreType);
 			KeyStore keyStore = KeyStore.getInstance(keystoreType);
 
-			FileInputStream keyStorePath = new FileInputStream(keyStoreFile);
-			FileInputStream trustStorePath = new FileInputStream(keyStoreFile);
 			trustStore.load(trustStorePath, password.toCharArray());
 			keyStore.load(keyStorePath, password.toCharArray());
-			trustStorePath.close();
-			keyStorePath.close();
 
 			TrustManagerFactory trustManagerFactory = TrustManagerFactory
 					.getInstance(TrustManagerFactory.getDefaultAlgorithm());
