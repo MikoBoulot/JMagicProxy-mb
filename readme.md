@@ -1,6 +1,8 @@
 JMagicProxy
 ===========
 
+Only difference with the original version from ExplodingBottle: an additional pom.xml file to ease building with Jenkins.
+
 This proxy consists in a system which allows HTTP and HTTPS requests to be modified.
 
 1) **Command line arguments**
